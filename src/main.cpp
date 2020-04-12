@@ -15,30 +15,31 @@ int main()
     int constraint = 7;
     puzzle.addBlock(xs,ys,constraint,1);
 
-    xs = {1,1,2};
-    ys = {0,1,1};
-    constraint = 9;
-    puzzle.addBlock(xs,ys,constraint,1);
-
-    xs = {2,3,3};
-    ys = {0,0,1};
+    xs = {1,2,3};
+    ys = {0,0,0};
     constraint = 8;
     puzzle.addBlock(xs,ys,constraint,1);
 
-    xs = {1,2};
-    ys = {2,2};
-    constraint = 4;
+    xs = {0,1,1};
+    ys = {3,3,2};
+    constraint = 9;
     puzzle.addBlock(xs,ys,constraint,1);
 
-    xs = {0,1};
-    ys = {3,3};
+    xs = {1,2,2};
+    ys = {1,1,2};
+    constraint = 8;
+    puzzle.addBlock(xs,ys,constraint,1);
+
+    xs = {3,3};
+    ys = {1,2};
     constraint = 1;
+    puzzle.addBlock(xs,ys,constraint,2);    
+
+     xs = {2,3};
+    ys = {3,3};
+    constraint = 3;
     puzzle.addBlock(xs,ys,constraint,2);
 
-    xs = {2,3,3};
-    ys = {3,2,3};
-    constraint = 5;
-    puzzle.addBlock(xs,ys,constraint,1);    
     
     Solver solver(&puzzle);
     solver.solve();

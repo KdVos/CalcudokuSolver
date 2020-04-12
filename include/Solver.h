@@ -48,8 +48,6 @@ class Solver{
                 return;
             }
             counter++;
-            _puzzle->print();
-            std::cout<<std::endl;
         }
         
     }

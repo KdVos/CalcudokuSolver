@@ -113,12 +113,26 @@ class Block{
     }
 
     int getConstraint(){
-        int sum = 0;
-        for(int i  = 0; i<_listOfSquares.size(); i++)
+
+        if (_type == 1)
         {
-            sum += _listOfSquares[i]->getValue();
+            int sum = 0;
+            for(int i  = 0; i<_listOfSquares.size(); i++)
+            {
+                sum += _listOfSquares[i]->getValue();
+            }
+            return sum;
         }
-        return sum;
+        else 
+        {   int num1 = _listOfSquares[0]->getValue();
+            int num2 = _listOfSquares[1]->getValue();
+            return abs(num1 - num2);
+        }
+       
+    }
+
+    int get_constraint(){
+        return _constraint;
     }
 
     private:

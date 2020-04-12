@@ -67,7 +67,7 @@ class Puzzle{
         print();
         for (int i=0; i<_listofBlocks.size(); i++)
         {
-            std::cout<<"Block "<<i<<", "<<_listofBlocks[i].getConstraint()<<std::endl;
+            std::cout<<"Block "<<i<<", "<<_listofBlocks[i].getConstraint()<<", "<<_listofBlocks[i].get_constraint()<<std::endl;
         }
     }
 
