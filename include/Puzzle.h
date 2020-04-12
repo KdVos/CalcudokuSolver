@@ -18,8 +18,7 @@ class Puzzle{
         populateRows();
     }
 
-    void addBlock(std::vector<int> xs, std::vector<int> ys, int value, int type)
-    {
+    void addBlock(std::vector<int> xs, std::vector<int> ys, int value, int type){
         Block block;
         block.setConstraint(value,type,_size);
         
@@ -64,8 +63,7 @@ class Puzzle{
         }
     }
 
-    void printfull()
-    {
+    void printfull(){
         print();
         for (int i=0; i<_listofBlocks.size(); i++)
         {
@@ -100,8 +98,7 @@ class Puzzle{
          }
          else
          {
-             std::cout<<"Exception ("<<x<<","<<y<<")"<<std::endl;
-             std::cout<<activeBlock<<std::endl;
+            
          }
         
          getSquare(x,y)->setFeasible(feasibleSet);

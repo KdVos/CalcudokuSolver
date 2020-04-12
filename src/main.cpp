@@ -32,8 +32,8 @@ int main()
 
     xs = {0,1};
     ys = {3,3};
-    constraint = 7;
-    puzzle.addBlock(xs,ys,constraint,1);
+    constraint = 1;
+    puzzle.addBlock(xs,ys,constraint,2);
 
     xs = {2,3,3};
     ys = {3,2,3};

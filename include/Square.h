@@ -31,7 +31,7 @@ public:
     }
 
     bool isSet(){
-        return _set;
+        return (_value >0);
     }
 
     void setValue(int Value){
