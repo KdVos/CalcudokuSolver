@@ -30,10 +30,19 @@ class Solver{
                 _puzzle->setValue(x,y,0);
 
                 idx = idx - 1;
+
+                if(idx<0)
+                {
+                    std::cout<<"Solver End with "<<counter<<" iterations"<<std::endl;
+                    std::cout<<"Puzzle Infeasible"<<std::endl;
+                    return;
+                }
+
                 idx2Cord(idx, x, y);  
                 _puzzle->setValue(x,y,0);
                 _guessCount[idx]++;
-                guessIdx = _guessCount[idx];   
+                guessIdx = _guessCount[idx]; 
+
             }
             else
             {

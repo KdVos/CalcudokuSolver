@@ -59,7 +59,7 @@ class Row{
     void printRow(){
         for(int i = 0; i<_listOfSquares.size(); i++)
         {
-            std::cout<<_listOfSquares[i]->getValue()<<"..";
+            std::cout<<_listOfSquares[i]->getValue()<<"...";
         }
         std::cout<<std::endl;
     }

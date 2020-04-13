@@ -32,13 +32,13 @@ int main()
 
     xs = {3,3};
     ys = {1,2};
-    constraint = 1;
-    puzzle.addBlock(xs,ys,constraint,2);    
+    constraint = 2;
+    puzzle.addBlock(xs,ys,constraint,4);    
 
-     xs = {2,3};
+    xs = {2,3};
     ys = {3,3};
-    constraint = 3;
-    puzzle.addBlock(xs,ys,constraint,2);
+    constraint = 4;
+    puzzle.addBlock(xs,ys,constraint,4);
 
     
     Solver solver(&puzzle);

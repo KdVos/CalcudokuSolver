@@ -23,9 +23,107 @@ class Block{
         {
             sumUpdate();
         }
-        else 
+        else if (_type == 2)
         {
             minusUpdate();
+        }
+        else if (_type == 3)
+        {
+            multiUpdate();
+        }
+        else
+        {
+            divUpdate();
+        }
+        
+    }
+
+    void divUpdate()
+    {
+
+        int currentProduct = 1;
+        int numUnSet = 0;
+
+        for(int i = 0; i<_listOfSquares.size(); i++)
+        {
+            int value = _listOfSquares[i]->getValue();
+
+            if(value > 0){
+                currentProduct*= value;
+            }
+            
+            if(!_listOfSquares[i]->isSet())
+            {
+                numUnSet++;
+            }
+        }
+
+        _feasibleList.resize(0);
+
+        if(numUnSet>1)
+        {
+            for(int i = 1; i<= _puzzleSize; i++)
+            {
+
+                _feasibleList.push_back(i);
+            }
+        }
+        else
+        {
+           for(int i = 1; i<= _puzzleSize; i++)
+            {
+                if(i * _constraint == currentProduct)
+                {
+                    _feasibleList.push_back(i);
+                }
+                else if (i % _constraint == 0 && i / _constraint == currentProduct)
+                {
+                    _feasibleList.push_back(i);
+                }
+            }
+        }
+    }
+
+    void multiUpdate(){
+        int currentProduct = 1;
+        int numUnSet = 0;
+
+        for(int i = 0; i<_listOfSquares.size(); i++)
+        {
+            int value = _listOfSquares[i]->getValue();
+
+            if(value > 0){
+                currentProduct*= value;
+            }
+            
+            if(!_listOfSquares[i]->isSet())
+            {
+                numUnSet++;
+            }
+        }
+        _feasibleList.resize(0);
+
+        if(numUnSet>1)
+        {
+            int remConstraint = _constraint/currentProduct;
+            for(int i = 1; i<= _puzzleSize; i++)
+            {
+                if(remConstraint % i == 0)
+                {
+                    _feasibleList.push_back(i);
+                }
+            }
+        }
+        else
+        {
+           int remConstraint = _constraint/currentProduct;
+           for(int i = 1; i<= _puzzleSize; i++)
+            {
+                if(remConstraint % i == 0 && remConstraint / i == 1)
+                {
+                    _feasibleList.push_back(i);
+                }
+            }
         }
     }
 
@@ -123,10 +221,23 @@ class Block{
             }
             return sum;
         }
-        else 
+        else if (_type == 2)
         {   int num1 = _listOfSquares[0]->getValue();
             int num2 = _listOfSquares[1]->getValue();
             return abs(num1 - num2);
+        }
+        else if (_type == 3)
+        {
+            int product = 1;
+            for(int i  = 0; i<_listOfSquares.size(); i++)
+            {
+                int value = _listOfSquares[i]->getValue();
+                if (value > 0){
+                  product *= value;  
+                }
+                
+            }
+            return product;
         }
        
     }
