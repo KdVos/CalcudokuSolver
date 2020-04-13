@@ -1,7 +1,7 @@
 {
     "Puzzle":
         {
-            "Size" : [4],
+            "Size" : 4,
             "Type" : "Calcudoku"
         }        
     ,

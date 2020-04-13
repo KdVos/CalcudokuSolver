@@ -7,14 +7,12 @@ class Square{
 public:
     Square(){
         _value = 0;
-        _set = false;
         _memberOfBlock = -1;
     }
 
     Square(const Square &other)
     {
         _value = other._value;
-        _set = other._set;
         _memberOfBlock = other._memberOfBlock;
     }
 
@@ -61,7 +59,6 @@ public:
 
     private:
         int _value;
-        bool _set;
         int _memberOfBlock;
         std::vector<int> _feasibleSet;
 };

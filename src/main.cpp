@@ -11,10 +11,21 @@
 #include <Solver.h>
 #include <Block.h>
 
-int main()
+int main(int argc, char* argv[])
 {
+    std::string filename;
 
-    std::fstream i("VK_11-4.json");
+    if (argc>1)
+    {
+        filename = argv[1];
+    }
+    else
+    {
+        filename = "../puzzles/puzzle.json";    
+    }
+    
+    std::cout<<"Reading (and parsing) json puzzle file:"<<filename<<std::endl;
+    std::fstream i(filename);
     nlohmann::json puzzlefile =  nlohmann::json::parse(i);
 
 
@@ -22,63 +33,22 @@ int main()
     int puzzleSize = puzzleInformation["Size"];
 
     Puzzle puzzle(puzzleSize);
-    // puzzle.print();
 
-    std::vector<int> xs = {0,1,2};
-    std::vector<int> ys = {0,0,0};
-    int constraint = 8;
-    puzzle.addBlock(xs,ys,constraint,1);
+    for (const auto &block : puzzlefile.at("Blocks"))
+    {
+        std::vector<int> xs(0);
+        std::vector<int> ys(0);
+        for(const auto &p : block.at("Coordinates"))
+        {
+            int x = p[0];
+            int y = p[1];
 
-    xs = {0,0,0};
-    ys = {1,2,3};
-    constraint = 14;
-    puzzle.addBlock(xs,ys,constraint,1);
-
-    xs = {1,1};
-    ys = {1,2};
-    constraint = 3;
-    puzzle.addBlock(xs,ys,constraint,4);
-
-    xs = {1,2};
-    ys = {2,2};
-    constraint = 4;
-    puzzle.addBlock(xs,ys,constraint,2);
-
-    xs = {1,2,0,1,0,1};
-    ys = {3,3,4,4,5,5};
-    constraint = 24;
-    puzzle.addBlock(xs,ys,constraint,1);
-
-    xs = {2,2};
-    ys = {4,5};
-    constraint = 2;
-    puzzle.addBlock(xs,ys,constraint,3);
-
-    xs = {3,4,5,3,3,3,3};
-    ys = {0,0,0,1,2,3,4};
-    constraint = 28;
-    puzzle.addBlock(xs,ys,constraint,1);
-
-    xs = {4,5};
-    ys = {1,1};
-    constraint = 5;
-    puzzle.addBlock(xs,ys,constraint,4);
-
-    xs = {4,5};
-    ys = {2,2};
-    constraint = 2;
-    puzzle.addBlock(xs,ys,constraint,4);
-
-    xs = {4,4};
-    ys = {3,4};
-    constraint = 8;
-    puzzle.addBlock(xs,ys,constraint,1);
-
-    xs = {5,5,5,4,3};
-    ys = {3,4,5,5,5};
-    constraint = 15;
-    puzzle.addBlock(xs,ys,constraint,1);
-    
+            xs.push_back(x);
+            ys.push_back(y);
+        }
+        puzzle.addBlock(xs,ys,block["Constraint"],block["Type"]);
+    }
+   
     auto start = std::chrono::high_resolution_clock::now(); 
     std::ios_base::sync_with_stdio(false); 
 
@@ -92,7 +62,7 @@ int main()
     time_taken *= 1e-9; 
     std::cout<<"Took "<<time_taken<<" Seconds"<<std::endl;
 
-    puzzle.print();
+    puzzle.printfull();
     
     return 0;
 }
