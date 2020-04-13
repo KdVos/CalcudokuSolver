@@ -20,7 +20,7 @@ class Solver{
         int counter = 0;
         while(true)
         {
-            _puzzle->update();
+            _puzzle->updatexy(x,y);
             std::vector<int> feasibleList = _puzzle->getFeasible(x,y);
             guessIdx = _guessCount[idx];       
 
@@ -42,7 +42,6 @@ class Solver{
                 _puzzle->setValue(x,y,0);
                 _guessCount[idx]++;
                 guessIdx = _guessCount[idx]; 
-
             }
             else
             {

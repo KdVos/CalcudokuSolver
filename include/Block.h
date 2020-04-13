@@ -239,18 +239,18 @@ class Block{
             }
             return product;
         }
-        else
+        else if (_type == 4)
         {
             int num1 = _listOfSquares[0]->getValue();
             int num2 = _listOfSquares[1]->getValue();
 
-            if (num1 > num2)
+            if (num1 >= num2)
             {
-                return num1 / num2;
+                return (num1 / num2);
             }
             else
             {
-                return num2 / num1;
+                return (num2 / num1);
             }
             
         }

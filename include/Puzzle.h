@@ -57,7 +57,7 @@ class Puzzle{
         {
             for (int x = 0; x<_size; x++)
             {
-                std::cout<<getValue(x,y);
+                std::cout<<getValue(x,y)<<" ";
             }
             std::cout<<std::endl;
         }
@@ -76,31 +76,27 @@ class Puzzle{
         {
             for (int y = 0; y<_size; y++)
             {
-               updatexy(x,y);
+                if(!getSquare(x,y)->isSet())
+                {
+                    updatexy(x,y);
+                }
             }
         }
     }
 
     void updatexy(int x,int y){
-        _listofRows[y].update();
-        _listofCollumns[x].update();
          std::vector<int> feasibleRow = _listofRows[y].getFeasibleSet();
          std::vector<int> feasibleCol = _listofCollumns[x].getFeasibleSet();
          std::vector<int> feasibleSet = compareLists(feasibleRow,feasibleCol);
 
          int activeBlock = getSquare(x,y)->getConstraintBlock();
 
-
          if(activeBlock>-1)
          {
             std::vector<int> feasibleBlock = _listofBlocks[activeBlock].getFeasibleSet();        
             feasibleSet = compareLists(feasibleSet,feasibleBlock);
          }
-         else
-         {
-            
-         }
-        
+
          getSquare(x,y)->setFeasible(feasibleSet);
     }
 
@@ -111,6 +107,7 @@ class Puzzle{
     int getSizeFull(){
         return _listofSquares.size();
     }
+
     private:
 
     std::vector<int> compareLists( std::vector<int> A,  std::vector<int> B){
