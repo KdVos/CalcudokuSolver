@@ -66,8 +66,8 @@ class Solver{
 
     void idx2Cord(int idx, int &x, int &y)
     {
-        x = idx / _puzzle->getSize();
-        y = idx % _puzzle->getSize();
+	x = idx % _puzzle->getSize();
+        y = idx / _puzzle->getSize();
     }
 
     void cord2Idx(int &idx, int x, int y)

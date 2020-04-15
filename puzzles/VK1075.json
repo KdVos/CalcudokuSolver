@@ -1,0 +1,60 @@
+{
+    "Puzzle":
+        {
+            "Size" : 5,
+            "Type" : "Calcudoku"
+        }        
+    ,
+
+    "Blocks":[
+        {
+            "Idx": 0,
+            "Type": 3,
+            "Constraint": 36,
+            "Coordinates": [[0,0],[1,0],[1,1]]
+        },
+        {
+            "Idx": 2,
+            "Type": 1,
+            "Constraint": 3,
+            "Coordinates": [[0,1],[0,2]]
+        },
+        {
+            "Idx": 3,
+            "Type": 4,
+            "Constraint": 2,
+            "Coordinates": [[0,3],[1,3]]
+        },
+        {
+            "Idx": 4,
+            "Type": 4,
+            "Constraint": 5,
+            "Coordinates": [[0,4],[1,4]]
+        },
+        {
+            "Idx": 5,
+            "Type": 2,
+            "Constraint": 3,
+            "Coordinates": [[2,0],[3,0]]
+        },
+        {
+            "Idx": 6,
+            "Type": 1,
+            "Constraint": 18,
+            "Coordinates": [[2,1],[2,2],[2,3],[1,2],[3,2]]
+        },
+        {
+            "Idx": 7,
+            "Type": 1,
+            "Constraint": 8,
+            "Coordinates": [[4,0],[4,1],[3,1]]
+        },
+		  {
+				"Idx": 8,
+				"Type": 1,
+				"Constraint": 17,
+				"Coordinates": [[4,2],[4,3],[4,4],[3,3],[3,4],[2,4]]
+		  }
+    ]
+    
+}

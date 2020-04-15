@@ -31,7 +31,9 @@ int main(int argc, char* argv[])
 
     auto puzzleInformation = puzzlefile["Puzzle"];
     int puzzleSize = puzzleInformation["Size"];
-
+	 std::string type = puzzleInformation["Type"];
+	
+	 std::cout<<"Start Solving "<<puzzleSize<<"x"<<puzzleSize<<" " <<type<<std::endl;
     Puzzle puzzle(puzzleSize);
 
     for (const auto &block : puzzlefile.at("Blocks"))

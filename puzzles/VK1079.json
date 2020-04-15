@@ -2,7 +2,8 @@
     "Puzzle":
         {
             "Size" : 6,
-            "Type" : "Calcudoku"
+            "Type" : "Calcudoku",
+	    "Comment" : "Volkskrant 1079"
         }        
     ,
 
