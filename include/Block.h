@@ -31,11 +31,40 @@ class Block{
         {
             multiUpdate();
         }
-        else
+        else if (_type == 4)
         {
             divUpdate();
         }
+        else
+        {
+            uniqueUpdate();
+        }
         
+        
+    }
+
+    void uniqueUpdate()
+    {
+        std::vector<bool> _presenceList;
+        _presenceList.assign(_puzzleSize,false);
+        _feasibleList.resize(0);
+
+        for (int i = 0; i<_listOfSquares.size();i++)
+        {
+            int value = _listOfSquares[i]->getValue();
+            if(value>0)
+            {
+                _presenceList[value-1] = true;
+            }
+        }
+
+        for (int i = 0; i<_presenceList.size();i++)
+        {
+            if(!_presenceList[i])
+            {
+                _feasibleList.push_back(i+1);
+            }
+        }
     }
 
     void divUpdate()

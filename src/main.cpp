@@ -50,6 +50,7 @@ int main(int argc, char* argv[])
         }
         puzzle.addBlock(xs,ys,block["Constraint"],block["Type"]);
     }
+    puzzle.setPersistent(4,4,5);
 
     puzzle.print();
    

@@ -57,8 +57,21 @@ public:
         std::cout<<std::endl;
     }
 
+    void setValuePersistent(int Value)
+    {
+        setValue(Value);
+        _persistent = true;
+    }
+
+
+    bool isPersistent()
+    {
+        return _persistent;
+    }
+
     private:
         int _value;
         int _memberOfBlock;
+        bool _persistent = false;
         std::vector<int> _feasibleSet;
 };

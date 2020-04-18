@@ -68,57 +68,88 @@ class Puzzle{
         getSquare(x,y)->printFeasible();
     }
 
-    void print(){
-        char ul[]={0x1b,'[','4',';','3','9','m',0};
-        std::cout<<ul<<" ";
+    void printSquare(int x, int y, int i=0)
+    {
+        int Blockxy = getBlock(x,y);
 
-        for (int x =0; x<_size; x++)
+        bool LineLeft  = Blockxy != getBlock(x-1,y);
+        bool LineRight = Blockxy != getBlock(x+1,y);
+        bool LineUp    = Blockxy != getBlock(x,y-1);
+        bool LineDown  = Blockxy != getBlock(x,y+1);
+
+        if(LineLeft)
         {
-            std::cout<<"    ";
+            std::cout<<" | ";
         }
+        else if (i!=2)
+        {
+            std::cout<<"   ";
+        }
+        else
+        {
+            if(LineDown && LineLeft)
+            {
+                std::cout<<" |_";
+            }
+            else if (LineDown)
+            {
+                std::cout<<"  _";
+            }
+            else
+            {
+                std::cout<<"   ";
+            }
+        }
+        
+              
+        if(i == 1){
+            int value = getValue(x,y);
+            if (value > 0)
+            {
+                std::cout<<" "<<getValue(x,y)<<" ";
+            }
+            else
+            {
+                std::cout<<" "<<"."<<" ";
+            }
+        }
+        else if(i!=2)
+        {
+            std::cout<<"   ";
+        }
+        else 
+        {
+            if(LineDown)
+            {
+                std::cout<<"___";
+            }
+            else
+            {
+                std::cout<<"   ";
+            }
+        }
+        
+    }
 
-        char normal[]={0x1b,'[','0',';','3','9','m',0};
-        std::cout<<normal<<std::endl;
-
+    void print(){
+        std::cout<<"  ";
+        for (int i = 0; i<_size*6-1; i++)
+        {
+            std::cout<<"_";
+        }
+        std::cout<<std::endl;
         for(int y = 0; y<_size; y++)
         {
-            std::cout<<"|";
-            for (int x = 0; x<_size; x++)
-            {  
-                 if(getBlock(x,y)!=getBlock(x,y+1))
-                {
-                    char ul[]={0x1b,'[','4',';','3','9','m',0};
-                    std::cout<<ul;
+            for (int i = 0; i<3; i++)
+            {
+                for (int x = 0; x<_size; x++)
+                {  
+                printSquare(x,y,i);                
                 }
-                else
-                {
-                    char normal[]={0x1b,'[','0',';','3','9','m',0};
-                    std::cout<<normal;
-                }
-
-                if(getValue(x,y)>0){
-                    std::cout<<" "<<getValue(x,y)<<" ";
-                }
-                else
-                {
-                    std::cout<<" "<<"."<<" ";
-                }
-
-                if(getBlock(x,y)!=getBlock(x+1,y))
-                {
-                    char normal[]={0x1b,'[','0',';','3','9','m',0};
-                    std::cout<<normal;
-                    std::cout<<"|";
-                }
-                else
-                {
-                    std::cout<<" ";
-                }
+            std::cout<<"|"<<std::endl;
             }
-            std::cout<<std::endl;
-            char normal[]={0x1b,'[','0',';','3','9','m',0};
-            std::cout<<normal;
         }
+        std::cout<<std::endl;
     }
 
     void printfull(){
@@ -164,6 +195,15 @@ class Puzzle{
 
     int getSizeFull(){
         return _listofSquares.size();
+    }
+
+    bool isPersistent(int x, int y){
+        return getSquare(x,y)->isPersistent();
+    }
+
+    void setPersistent(int x, int y, int value)
+    {
+        getSquare(x,y)->setValuePersistent(value);
     }
 
     private:
