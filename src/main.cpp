@@ -50,6 +50,8 @@ int main(int argc, char* argv[])
         }
         puzzle.addBlock(xs,ys,block["Constraint"],block["Type"]);
     }
+
+    puzzle.print();
    
     auto start = std::chrono::high_resolution_clock::now(); 
     std::ios_base::sync_with_stdio(false); 

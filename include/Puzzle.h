@@ -38,13 +38,29 @@ class Puzzle{
         return getSquare(x,y)->getValue();
     }
 
+    int getBlock(int x, int y){
+        if(x<_size && y<_size){
+            return getSquare(x,y)->getConstraintBlock();
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
     void setValue(int x, int y,int v){
         getSquare(x,y)->setValue(v);
         updatexy(x,y);
     }
 
     std::vector<int> getFeasible(int x, int y){
-        return getSquare(x,y)->getFeasible();
+        if(x<_size && y<_size){
+            return getSquare(x,y)->getFeasible();
+        }
+        else
+        {
+            return {-1};
+        }
     }
 
     void printFeasiblexy(int x, int y){
@@ -53,13 +69,55 @@ class Puzzle{
     }
 
     void print(){
+        char ul[]={0x1b,'[','4',';','3','9','m',0};
+        std::cout<<ul<<" ";
+
+        for (int x =0; x<_size; x++)
+        {
+            std::cout<<"    ";
+        }
+
+        char normal[]={0x1b,'[','0',';','3','9','m',0};
+        std::cout<<normal<<std::endl;
+
         for(int y = 0; y<_size; y++)
         {
+            std::cout<<"|";
             for (int x = 0; x<_size; x++)
-            {
-                std::cout<<getValue(x,y)<<" ";
+            {  
+                 if(getBlock(x,y)!=getBlock(x,y+1))
+                {
+                    char ul[]={0x1b,'[','4',';','3','9','m',0};
+                    std::cout<<ul;
+                }
+                else
+                {
+                    char normal[]={0x1b,'[','0',';','3','9','m',0};
+                    std::cout<<normal;
+                }
+
+                if(getValue(x,y)>0){
+                    std::cout<<" "<<getValue(x,y)<<" ";
+                }
+                else
+                {
+                    std::cout<<" "<<"."<<" ";
+                }
+
+                if(getBlock(x,y)!=getBlock(x+1,y))
+                {
+                    char normal[]={0x1b,'[','0',';','3','9','m',0};
+                    std::cout<<normal;
+                    std::cout<<"|";
+                }
+                else
+                {
+                    std::cout<<" ";
+                }
             }
             std::cout<<std::endl;
+            char normal[]={0x1b,'[','0',';','3','9','m',0};
+            std::cout<<normal;
         }
     }
 
