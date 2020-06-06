@@ -283,6 +283,10 @@ class Block{
             }
             
         }
+        else
+        {
+            return -1;
+        }
         
        
     }

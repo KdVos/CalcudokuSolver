@@ -13,6 +13,8 @@
 
 int main(int argc, char* argv[])
 {
+
+    // File I/O
     std::string filename;
 
     if (argc>1)
@@ -31,29 +33,69 @@ int main(int argc, char* argv[])
 
     auto puzzleInformation = puzzlefile["Puzzle"];
     int puzzleSize = puzzleInformation["Size"];
-	 std::string type = puzzleInformation["Type"];
+	std::string type = puzzleInformation["Type"];
 	
-	 std::cout<<"Start Solving "<<puzzleSize<<"x"<<puzzleSize<<" " <<type<<std::endl;
+	std::cout<<"Start Solving "<<puzzleSize<<"x"<<puzzleSize<<" " <<type<<std::endl;
     Puzzle puzzle(puzzleSize);
 
-    for (const auto &block : puzzlefile.at("Blocks"))
+
+    // Construct Problem
+    if(type.compare("Calcudoku")==0)
     {
-        std::vector<int> xs(0);
-        std::vector<int> ys(0);
-        for(const auto &p : block.at("Coordinates"))
+        for (const auto &block : puzzlefile.at("Blocks"))
         {
-            int x = p[0];
-            int y = p[1];
+            std::vector<int> xs(0);
+            std::vector<int> ys(0);
+            for(const auto &p : block.at("Coordinates"))
+            {
+                int x = p[0];
+                int y = p[1];
 
-            xs.push_back(x);
-            ys.push_back(y);
+                xs.push_back(x);
+                ys.push_back(y);
+            }
+            puzzle.addBlock(xs,ys,block["Constraint"],block["Type"]);
         }
-        puzzle.addBlock(xs,ys,block["Constraint"],block["Type"]);
     }
-    puzzle.setPersistent(4,4,5);
+    else if (type.compare("Sudoku") == 0)
+    {
+        int squareSize = puzzleInformation["squareSize"];
+        int widthBlocks = puzzleSize/squareSize;
 
+        for (int j = 0; j<widthBlocks; j++)
+        {
+            for(int i = 0; i<widthBlocks; i++)
+            {   
+                std::vector<int> xs(0);
+                std::vector<int> ys(0);
+                for (int y = 0; y<widthBlocks; y++)
+                {
+                    for(int x = 0; x<widthBlocks; x++)
+                    {
+                        xs.push_back(x + i*widthBlocks);
+                        ys.push_back(y + j*widthBlocks);
+                    }
+                }            
+            puzzle.addBlock(xs,ys,0,5);
+            }
+        } 
+    }
+
+    if(puzzlefile.find("Hints") != puzzlefile.end())
+    {
+        auto Hints = puzzlefile["Hints"];
+
+        for (const auto &h :Hints["xyv"])
+        {
+            puzzle.setPersistent(h[0],h[1],h[2]);
+        }
+    }
+
+
+    
     puzzle.print();
    
+    // Solver
     auto start = std::chrono::high_resolution_clock::now(); 
     std::ios_base::sync_with_stdio(false); 
 
@@ -67,6 +109,8 @@ int main(int argc, char* argv[])
     time_taken *= 1e-9; 
     std::cout<<"Took "<<time_taken<<" Seconds"<<std::endl;
 
+
+    //Display Solution
     puzzle.printfull();
     
     return 0;

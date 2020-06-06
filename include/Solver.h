@@ -1,5 +1,6 @@
 #pragma once
 #include <Puzzle.h>
+#include <utility>
 
 class Solver{
     public:
@@ -63,10 +64,11 @@ class Solver{
     private:
     Puzzle* _puzzle;
     std::vector<int> _guessCount;
+    std::vector<std::pair<int,int>> blockIdxStore;
 
     void idx2Cord(int idx, int &x, int &y)
     {
-	x = idx % _puzzle->getSize();
+	    x = idx % _puzzle->getSize();
         y = idx / _puzzle->getSize();
     }
 

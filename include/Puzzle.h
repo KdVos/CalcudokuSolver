@@ -39,7 +39,7 @@ class Puzzle{
     }
 
     int getBlock(int x, int y){
-        if(x<_size && y<_size){
+        if(x<_size && y<_size && x>=0 && y>=0){
             return getSquare(x,y)->getConstraintBlock();
         }
         else

@@ -33,7 +33,9 @@ public:
     }
 
     void setValue(int Value){
-        _value = Value;
+        if(!_persistent){
+            _value = Value;
+        }
     }
 
     void setFeasible(std::vector<int> feasibleSet)
@@ -43,7 +45,13 @@ public:
 
     std::vector<int> getFeasible()
     {
-        return _feasibleSet;
+        if(!_persistent){
+            return _feasibleSet;
+        }
+        else
+        {
+            return {_value};
+        }
     }
 
     void printFeasible()
